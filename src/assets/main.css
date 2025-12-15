@@ -468,15 +468,14 @@ button:hover {
   .priority-select,
   .add-btn {
     width: 100%;
-    max-width: 100%; /* Ensure it doesn't overflow */
-    box-sizing: border-box; /* Include padding in width */
+    max-width: 100%; 
+    box-sizing: border-box; 
   }
 
   .date-input {
-    /* Fix for iOS date input appearance */
     -webkit-appearance: none;
     appearance: none;
-    min-height: 44px; /* Better touch target */
+    min-height: 44px; 
   }
 
   .filters {
@@ -484,17 +483,17 @@ button:hover {
   }
 
   .filters button {
-    flex: 1 1 30%; /* Grow to fill space, min 30% width */
+    flex: 1 1 30%;
     font-size: 0.9em;
   }
 
   .todo-list li {
     padding: 10px 5px;
-    flex-wrap: wrap; /* Allow wrapping if content is too long */
+    flex-wrap: wrap;
   }
   
   .todo-content {
-    min-width: 200px; /* Ensure content takes space before wrapping */
+    min-width: 200px;
   }
 
   .footer {
