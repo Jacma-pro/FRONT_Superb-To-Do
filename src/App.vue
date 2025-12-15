@@ -1,0 +1,138 @@
+<script setup>
+import { ref, computed, onMounted, watch } from 'vue'
+import TodoInput from './components/TodoInput.vue'
+import TodoFilters from './components/TodoFilters.vue'
+import TodoList from './components/TodoList.vue'
+import TodoStats from './components/TodoStats.vue'
+import { t, setLang, lang } from './assets/i18n/i18n'
+
+// State
+const todos = ref([])
+const filter = ref('all')
+const isDark = ref(false)
+
+onMounted(() => {
+  const saved = localStorage.getItem('my-todos')
+  if (saved) {
+    todos.value = JSON.parse(saved)
+  }
+  
+  // Load theme
+  const savedTheme = localStorage.getItem('theme')
+  if (savedTheme === 'dark') {
+    isDark.value = true
+    document.body.classList.add('dark-mode')
+  }
+})
+
+const toggleTheme = () => {
+  isDark.value = !isDark.value
+  if (isDark.value) {
+    document.body.classList.add('dark-mode')
+    localStorage.setItem('theme', 'dark')
+  } else {
+    document.body.classList.remove('dark-mode')
+    localStorage.setItem('theme', 'light')
+  }
+}
+
+watch(todos, (newVal) => {
+  localStorage.setItem('my-todos', JSON.stringify(newVal))
+}, { deep: true })
+
+// Actions
+const addTodo = ({ text, priority, deadline }) => {
+  todos.value.unshift({
+    id: Date.now(),
+    text: text,
+    priority: priority,
+    deadline: deadline,
+    done: false
+  })
+}
+
+const removeTodo = (todo) => {
+  todos.value = todos.value.filter(t => t.id !== todo.id)
+}
+
+const toggleTodo = (todo) => {
+  const t = todos.value.find(item => item.id === todo.id)
+  if (t) t.done = !t.done
+}
+
+const updateTodo = (updatedTodo) => {
+  const index = todos.value.findIndex(t => t.id === updatedTodo.id)
+  if (index !== -1) {
+    todos.value[index] = updatedTodo
+  }
+}
+
+const clearCompleted = () => {
+  if (confirm(t.value.confirm.clearCompleted)) {
+    todos.value = todos.value.filter(t => !t.done)
+  }
+}
+
+const clearAll = () => {
+  if (confirm(t.value.confirm.clearAll)) {
+    todos.value = []
+  }
+}
+
+const filteredTodos = computed(() => {
+  let list = todos.value
+  
+  if (filter.value === 'active') list = list.filter(t => !t.done)
+  else if (filter.value === 'completed') list = list.filter(t => t.done)
+  
+  const priorityOrder = { high: 3, medium: 2, low: 1 }
+  
+  return list.sort((a, b) => {
+    if (a.done === b.done) {
+      return priorityOrder[b.priority] - priorityOrder[a.priority]
+    }
+    return a.done ? 1 : -1
+  })
+})
+</script>
+
+<template>
+  <div class="container">
+    <div class="header-row">
+      <h1>{{ t.title }}</h1>
+      <div class="controls">
+        <button @click="toggleTheme" class="theme-btn" :title="isDark ? 'Light Mode' : 'Dark Mode'">
+          {{ isDark ? '☀️' : '🌙' }}
+        </button>
+        <div class="lang-switch">
+          <button @click="setLang('en')" :class="{ active: lang === 'en' }">🇬🇧</button>
+          <button @click="setLang('fr')" :class="{ active: lang === 'fr' }">🇫🇷</button>
+        </div>
+      </div>
+    </div>
+    
+    <TodoStats :todos="todos" />
+
+    <TodoInput @add-todo="addTodo" />
+    
+    <TodoFilters 
+      :currentFilter="filter" 
+      @set-filter="(f) => filter = f" 
+    />
+    
+    <TodoList 
+      :todos="filteredTodos"
+      @remove-todo="removeTodo"
+      @toggle-todo="toggleTodo"
+      @update-todo="updateTodo"
+    />
+
+    <div class="footer" v-if="todos.length > 0">
+      <p>{{ todos.filter(t => !t.done).length }} {{ t.itemsLeft }}</p>
+      <div class="footer-actions">
+        <button @click="clearCompleted" v-if="todos.some(t => t.done)" class="text-btn">{{ t.actions.clearCompleted }}</button>
+        <button @click="clearAll" class="text-btn danger">{{ t.actions.clearAll }}</button>
+      </div>
+    </div>
+  </div>
+</template>

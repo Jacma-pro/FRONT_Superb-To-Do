@@ -1,0 +1,30 @@
+{
+  "title": "Superbe Todo List",
+  "inputPlaceholder": "Ajouter une tâche...",
+  "add": "Ajouter",
+  "priorities": {
+    "low": "Basse",
+    "medium": "Moyenne",
+    "high": "Haute"
+  },
+  "deadline": "Échéance (optionnel)",
+  "filters": {
+    "all": "Toutes",
+    "active": "Actives",
+    "completed": "Terminées"
+  },
+  "stats": {
+    "progress": "Progression"
+  },
+  "actions": {
+    "edit": "Éditer",
+    "delete": "Supprimer",
+    "clearCompleted": "Effacer terminées",
+    "clearAll": "Tout effacer"
+  },
+  "itemsLeft": "tâches restantes",
+  "confirm": {
+    "clearCompleted": "Êtes-vous sûr de vouloir effacer toutes les tâches terminées ?",
+    "clearAll": "Êtes-vous sûr de vouloir TOUT effacer ?"
+  }
+}

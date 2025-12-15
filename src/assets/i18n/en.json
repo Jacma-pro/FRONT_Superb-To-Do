@@ -1,0 +1,30 @@
+{
+  "title": "Superb Todo List",
+  "inputPlaceholder": "Add a new task...",
+  "add": "Add",
+  "priorities": {
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High"
+  },
+  "deadline": "Deadline (optional)",
+  "filters": {
+    "all": "All",
+    "active": "Active",
+    "completed": "Completed"
+  },
+  "stats": {
+    "progress": "Progress"
+  },
+  "actions": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "clearCompleted": "Clear Completed",
+    "clearAll": "Clear All"
+  },
+  "itemsLeft": "items left",
+  "confirm": {
+    "clearCompleted": "Are you sure you want to clear all completed tasks?",
+    "clearAll": "Are you sure you want to delete ALL tasks?"
+  }
+}
