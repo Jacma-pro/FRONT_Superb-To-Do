@@ -59,4 +59,4 @@ A modern, feature-rich Todo List application built with **Vue 3** and **Vite**. 
 
 ## 📄 License
 
-This project is open source and available under the [MIT License](LICENSE).
+This project is open source, so take it, modify it, and make it your own!
