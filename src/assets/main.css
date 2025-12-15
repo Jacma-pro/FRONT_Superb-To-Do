@@ -188,6 +188,7 @@ button:hover {
 
 .add-btn {
   background-color: var(--accent-green);
+  width: 100%;
   color: white;
   border: none;
   font-weight: bold;
