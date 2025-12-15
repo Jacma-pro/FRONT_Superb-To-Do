@@ -55,7 +55,7 @@ A modern, feature-rich Todo List application built with **Vue 3** and **Vite**. 
 
 ## 📸 Screenshots
 
-_(You can add screenshots here later)_
+![screen_for_github](screen_for_github.png)
 
 ## 📄 License
 
