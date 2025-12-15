@@ -1,5 +1,5 @@
 <script setup>
-import { t } from '../assets/i18n/i18n'
+import { translations } from '../assets/i18n/i18n'
 defineProps(['currentFilter'])
 defineEmits(['set-filter'])
 </script>
@@ -9,14 +9,14 @@ defineEmits(['set-filter'])
     <button 
       @click="$emit('set-filter', 'all')" 
       :class="{ active: currentFilter === 'all' }"
-    >{{ t.filters.all }}</button>
+    >{{ translations.filters.all }}</button>
     <button 
       @click="$emit('set-filter', 'active')" 
       :class="{ active: currentFilter === 'active' }"
-    >{{ t.filters.active }}</button>
+    >{{ translations.filters.active }}</button>
     <button 
       @click="$emit('set-filter', 'completed')" 
       :class="{ active: currentFilter === 'completed' }"
-    >{{ t.filters.completed }}</button>
+    >{{ translations.filters.completed }}</button>
   </div>
 </template>

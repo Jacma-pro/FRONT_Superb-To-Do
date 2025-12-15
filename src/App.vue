@@ -4,7 +4,7 @@ import TodoInput from './components/TodoInput.vue'
 import TodoFilters from './components/TodoFilters.vue'
 import TodoList from './components/TodoList.vue'
 import TodoStats from './components/TodoStats.vue'
-import { t, setLang, lang } from './assets/i18n/i18n'
+import { translations, setLang, activeLang } from './assets/i18n/i18n'
 
 // State
 const todos = ref([])
@@ -56,8 +56,8 @@ const removeTodo = (todo) => {
 }
 
 const toggleTodo = (todo) => {
-  const t = todos.value.find(item => item.id === todo.id)
-  if (t) t.done = !t.done
+  const foundTodo = todos.value.find(item => item.id === todo.id)
+  if (foundTodo) foundTodo.done = !foundTodo.done
 }
 
 const updateTodo = (updatedTodo) => {
@@ -68,13 +68,13 @@ const updateTodo = (updatedTodo) => {
 }
 
 const clearCompleted = () => {
-  if (confirm(t.value.confirm.clearCompleted)) {
+  if (confirm(translations.value.confirm.clearCompleted)) {
     todos.value = todos.value.filter(t => !t.done)
   }
 }
 
 const clearAll = () => {
-  if (confirm(t.value.confirm.clearAll)) {
+  if (confirm(translations.value.confirm.clearAll)) {
     todos.value = []
   }
 }
@@ -99,14 +99,14 @@ const filteredTodos = computed(() => {
 <template>
   <div class="container">
     <div class="header-row">
-      <h1>{{ t.title }}</h1>
+      <h1>{{ translations.title }}</h1>
       <div class="controls">
         <button @click="toggleTheme" class="theme-btn" :title="isDark ? 'Light Mode' : 'Dark Mode'">
           {{ isDark ? '☀️' : '🌙' }}
         </button>
         <div class="lang-switch">
-          <button @click="setLang('en')" :class="{ active: lang === 'en' }">🇬🇧</button>
-          <button @click="setLang('fr')" :class="{ active: lang === 'fr' }">🇫🇷</button>
+          <button @click="setLang('en')" :class="{ active: activeLang === 'en' }">🇬🇧</button>
+          <button @click="setLang('fr')" :class="{ active: activeLang === 'fr' }">🇫🇷</button>
         </div>
       </div>
     </div>
@@ -128,10 +128,10 @@ const filteredTodos = computed(() => {
     />
 
     <div class="footer" v-if="todos.length > 0">
-      <p>{{ todos.filter(t => !t.done).length }} {{ t.itemsLeft }}</p>
+      <p>{{ todos.filter(t => !t.done).length }} {{ translations.itemsLeft }}</p>
       <div class="footer-actions">
-        <button @click="clearCompleted" v-if="todos.some(t => t.done)" class="text-btn">{{ t.actions.clearCompleted }}</button>
-        <button @click="clearAll" class="text-btn danger">{{ t.actions.clearAll }}</button>
+        <button @click="clearCompleted" v-if="todos.some(t => t.done)" class="text-btn">{{ translations.actions.clearCompleted }}</button>
+        <button @click="clearAll" class="text-btn danger">{{ translations.actions.clearAll }}</button>
       </div>
     </div>
   </div>

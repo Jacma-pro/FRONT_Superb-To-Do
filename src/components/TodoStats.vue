@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import { t } from '../assets/i18n/i18n'
+import { translations } from '../assets/i18n/i18n'
 
 const props = defineProps(['todos'])
 
@@ -15,7 +15,7 @@ const percentage = computed(() => {
 <template>
   <div class="stats-container" v-if="total > 0">
     <div class="stats-text">
-      <span>{{ t.stats.progress }}</span>
+      <span>{{ translations.stats.progress }}</span>
       <span>{{ percentage }}%</span>
     </div>
     <div class="progress-bar-bg">

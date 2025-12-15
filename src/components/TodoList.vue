@@ -1,6 +1,6 @@
 <script setup>
 import { ref, nextTick } from 'vue'
-import { t } from '../assets/i18n/i18n'
+import { translations } from '../assets/i18n/i18n'
 
 defineProps(['todos'])
 const emit = defineEmits(['remove-todo', 'toggle-todo', 'update-todo'])
@@ -69,7 +69,7 @@ const isOverdue = (dateString) => {
             📅 {{ formatDate(todo.deadline) }}
           </span>
         </div>
-        <span :class="['priority-badge', todo.priority]">{{ t.priorities[todo.priority] }}</span>
+        <span :class="['priority-badge', todo.priority]">{{ translations.priorities[todo.priority] }}</span>
       </div>
 
       <!-- Content (Edit Mode) -->
@@ -94,10 +94,10 @@ const isOverdue = (dateString) => {
 
       <!-- Actions -->
       <div class="actions" v-if="editingId !== todo.id">
-        <button @click="startEdit(todo)" class="icon-btn edit-btn" :title="t.actions.edit">
+        <button @click="startEdit(todo)" class="icon-btn edit-btn" :title="translations.actions.edit">
           ✎
         </button>
-        <button @click="$emit('remove-todo', todo)" class="icon-btn delete-btn" :title="t.actions.delete">
+        <button @click="$emit('remove-todo', todo)" class="icon-btn delete-btn" :title="translations.actions.delete">
           ×
         </button>
       </div>

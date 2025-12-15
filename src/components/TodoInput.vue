@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { t } from '../assets/i18n/i18n'
+import { translations } from '../assets/i18n/i18n'
 
 const newTodo = ref('')
 const priority = ref('medium') // default priority
@@ -26,7 +26,7 @@ const handleSubmit = () => {
     <input 
       v-model="newTodo" 
       @keyup.enter="handleSubmit"
-      :placeholder="t.inputPlaceholder" 
+      :placeholder="translations.inputPlaceholder" 
       class="todo-input"
     />
     
@@ -34,15 +34,15 @@ const handleSubmit = () => {
       type="date" 
       v-model="deadline" 
       class="date-input"
-      :title="t.deadline"
+      :title="translations.deadline"
     />
 
     <select v-model="priority" class="priority-select">
-      <option value="low">{{ t.priorities.low }}</option>
-      <option value="medium">{{ t.priorities.medium }}</option>
-      <option value="high">{{ t.priorities.high }}</option>
+      <option value="low">{{ translations.priorities.low }}</option>
+      <option value="medium">{{ translations.priorities.medium }}</option>
+      <option value="high">{{ translations.priorities.high }}</option>
     </select>
 
-    <button @click="handleSubmit" class="add-btn">{{ t.add }}</button>
+    <button @click="handleSubmit" class="add-btn">{{ translations.add }}</button>
   </div>
 </template>
