@@ -147,6 +147,9 @@ h1 {
   color: var(--text-primary);
   font-family: inherit;
   cursor: pointer;
+  -webkit-appearance: none; /* Reset iOS default styling */
+  appearance: none;
+  min-height: 44px; /* Easier to tap on mobile */
 }
 
 .priority-select {
@@ -455,6 +458,15 @@ button:hover {
   .priority-select,
   .add-btn {
     width: 100%;
+    max-width: 100%; /* Ensure it doesn't overflow */
+    box-sizing: border-box; /* Include padding in width */
+  }
+
+  .date-input {
+    /* Fix for iOS date input appearance */
+    -webkit-appearance: none;
+    appearance: none;
+    min-height: 44px; /* Better touch target */
   }
 
   .filters {
