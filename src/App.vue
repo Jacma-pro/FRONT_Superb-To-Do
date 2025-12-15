@@ -52,7 +52,7 @@ const addTodo = ({ text, priority, deadline }) => {
 }
 
 const removeTodo = (todo) => {
-  todos.value = todos.value.filter(t => t.id !== todo.id)
+  todos.value = todos.value.filter(item => item.id !== todo.id)
 }
 
 const toggleTodo = (todo) => {
@@ -61,7 +61,7 @@ const toggleTodo = (todo) => {
 }
 
 const updateTodo = (updatedTodo) => {
-  const index = todos.value.findIndex(t => t.id === updatedTodo.id)
+  const index = todos.value.findIndex(item => item.id === updatedTodo.id)
   if (index !== -1) {
     todos.value[index] = updatedTodo
   }
@@ -69,7 +69,7 @@ const updateTodo = (updatedTodo) => {
 
 const clearCompleted = () => {
   if (confirm(translations.value.confirm.clearCompleted)) {
-    todos.value = todos.value.filter(t => !t.done)
+    todos.value = todos.value.filter(todo => !todo.done)
   }
 }
 
@@ -82,16 +82,16 @@ const clearAll = () => {
 const filteredTodos = computed(() => {
   let list = todos.value
   
-  if (filter.value === 'active') list = list.filter(t => !t.done)
-  else if (filter.value === 'completed') list = list.filter(t => t.done)
+  if (filter.value === 'active') list = list.filter(todo => !todo.done)
+  else if (filter.value === 'completed') list = list.filter(todo => todo.done)
   
   const priorityOrder = { high: 3, medium: 2, low: 1 }
   
-  return list.sort((a, b) => {
-    if (a.done === b.done) {
-      return priorityOrder[b.priority] - priorityOrder[a.priority]
+  return list.sort((todoA, todoB) => {
+    if (todoA.done === todoB.done) {
+      return priorityOrder[todoB.priority] - priorityOrder[todoA.priority]
     }
-    return a.done ? 1 : -1
+    return todoA.done ? 1 : -1
   })
 })
 </script>
@@ -117,7 +117,7 @@ const filteredTodos = computed(() => {
     
     <TodoFilters 
       :currentFilter="filter" 
-      @set-filter="(f) => filter = f" 
+      @set-filter="(newFilter) => filter = newFilter" 
     />
     
     <TodoList 
@@ -128,9 +128,9 @@ const filteredTodos = computed(() => {
     />
 
     <div class="footer" v-if="todos.length > 0">
-      <p>{{ todos.filter(t => !t.done).length }} {{ translations.itemsLeft }}</p>
+      <p>{{ todos.filter(todo => !todo.done).length }} {{ translations.itemsLeft }}</p>
       <div class="footer-actions">
-        <button @click="clearCompleted" v-if="todos.some(t => t.done)" class="text-btn">{{ translations.actions.clearCompleted }}</button>
+        <button @click="clearCompleted" v-if="todos.some(todo => todo.done)" class="text-btn">{{ translations.actions.clearCompleted }}</button>
         <button @click="clearAll" class="text-btn danger">{{ translations.actions.clearAll }}</button>
       </div>
     </div>

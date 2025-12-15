@@ -5,7 +5,7 @@ import { translations } from '../assets/i18n/i18n'
 const props = defineProps(['todos'])
 
 const total = computed(() => props.todos.length)
-const completed = computed(() => props.todos.filter(t => t.done).length)
+const completed = computed(() => props.todos.filter(todo => todo.done).length)
 const percentage = computed(() => {
   if (total.value === 0) return 0
   return Math.round((completed.value / total.value) * 100)
