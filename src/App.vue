@@ -130,7 +130,9 @@ const filteredTodos = computed(() => {
     <div class="footer" v-if="todos.length > 0">
       <p>{{ todos.filter(todo => !todo.done).length }} {{ translations.itemsLeft }}</p>
       <div class="footer-actions">
-        <button @click="clearCompleted" v-if="todos.some(todo => todo.done)" class="text-btn">{{ translations.actions.clearCompleted }}</button>
+        <button @click="clearCompleted" v-if="todos.some(todo => todo.done)"
+          class="text-btn">{{ translations.actions.clearCompleted }}
+        </button>
         <button @click="clearAll" class="text-btn danger">{{ translations.actions.clearAll }}</button>
       </div>
     </div>
